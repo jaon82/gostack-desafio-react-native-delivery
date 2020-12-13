@@ -54,15 +54,15 @@ const Dashboard: React.FC = () => {
   const navigation = useNavigation();
 
   async function handleNavigate(id: number): Promise<void> {
-    // Navigate do ProductDetails page
+    navigation.navigate('FoodDetails', { id });
   }
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
       const response = await api.get<Food[]>('foods', {
         params: {
-          category: selectedCategory,
-          name: searchValue !== '' ? searchValue : null,
+          category_like: selectedCategory,
+          name_like: searchValue !== '' ? searchValue : null,
         },
       });
       const foodsParsed = response.data.map(food => ({
